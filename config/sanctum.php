@@ -33,7 +33,9 @@ return [
     |
     */
 
-    'guard' => ['web'],
+     'guard' => ['web'],
+    // 'guard' => 'sanctum', // Change this from 'web' to 'sanctum'
+
 
     /*
     |--------------------------------------------------------------------------
