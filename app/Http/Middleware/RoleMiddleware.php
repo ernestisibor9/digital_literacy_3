@@ -16,22 +16,18 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
-                        // Check if the user is authenticated
-                        if (!Auth::check()) {
-                            abort(403, 'User is not authenticated.');
-                        }
+        // Check if the user is authenticated
+        if (!Auth::check()) {
+            return response()->json(['error' => 'User is not authenticated.'], 403);
+        }
 
-                        $user = Auth::user();
+        $user = Auth::user();
 
-                        // Check the user's role
-                        if ($user->role !== $role) {
-                            abort(403, 'This action is unauthorized.');
-                        }
+        // Check the user's role
+        if ($user->role !== $role) {
+            return response()->json(['error' => 'This action is unauthorized.'], 403);
+        }
 
-                        // Log::info('Middleware Role:', ['role' => $role]);
-
-                        // Log::info('Authenticated User Role:', ['role' => $user->role]);
-
-                        return $next($request);
+        return $next($request);
     }
 }
